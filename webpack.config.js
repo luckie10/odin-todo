@@ -27,6 +27,10 @@ const config = {
   module: {
     rules: [
       {
+        test: /\.html$/,
+        loader: "html-loader",
+      },
+      {
         test: /\.m?js$/,
         exclude: /node_modules/,
         use: {
