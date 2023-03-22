@@ -1,8 +1,13 @@
 const ProjectList = (() => {
   const projects = [];
 
-  const addProject = (project) => {
-    projects.push(project);
+  const addProject = (newProject) => {
+    if (
+      projects.find((project) => project.get("name") === newProject.get("name"))
+    )
+      return "Project already exists";
+
+    projects.push(newProject);
   };
 
   const deleteProject = (projectToDelete) => {
