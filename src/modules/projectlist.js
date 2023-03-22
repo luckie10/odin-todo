@@ -10,6 +10,9 @@ const ProjectList = (() => {
     projects.push(newProject);
   };
 
+  const getProject = (projectName) =>
+    projects.find((project) => project.get("name") === projectName);
+
   const deleteProject = (projectToDelete) => {
     projects = projects.filter((project) => project !== projectToDelete);
   };
@@ -19,7 +22,7 @@ const ProjectList = (() => {
 
   const getProjects = () => projects;
 
-  return {};
+  return { addProject, getProject, getProjects };
 })();
 
 export { ProjectList as default };
