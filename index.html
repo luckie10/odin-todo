@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Odin Todo</title>
-  </head>
 
-  <body>
-    <div class="sidebar">
-      <div class="project-list-wrapper">
-        <div class="project-header">
-          <input type="text" class="project-name" />
-          <button class="add-project">Add Project</button>
-        </div>
-        <div class="project-list"></div>
+<head>
+  <meta charset="utf-8" />
+  <title>Odin Todo</title>
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="project-list-wrapper">
+      <div class="project-header">
+        <input type="text" class="project-name" />
+        <button class="add-project">Add Project</button>
       </div>
+      <ul class="project-list"></ul>
     </div>
-    <div class="main">
-      <div class="task-list"></div>
-      <div class="add-task">
-        <input type="text" class="title" />
-        <input type="text" class="desc" />
-        <input type="text" class="due-date" />
-        <input type="text" class="priority" />
-        <button class="add-task">Add Task</button>
-      </div>
+  </div>
+  <div class="main">
+    <div class="add-task">
+      <input type="text" class="title" />
+      <input type="text" class="desc" />
+      <input type="text" class="due-date" />
+      <input type="text" class="priority" />
+      <button class="add-task">Add Task</button>
     </div>
-  </body>
+    <ul class="task-list"></ul>
+  </div>
+</body>
+
 </html>
