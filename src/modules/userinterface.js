@@ -1,6 +1,7 @@
 import { createElement, removeAllChildren } from "../util";
 import ProjectList from "./projectlist";
 import Project from "./project";
+import Task from "./task";
 
 const UserInterface = (() => {
   let activeProject = ProjectList.getProject("Inbox");
@@ -76,11 +77,35 @@ const UserInterface = (() => {
     inputProjectName.value = "";
   };
 
+  const addTask = () => {
+    const inputName = document.querySelector(".task-name");
+    const inputDesc = document.querySelector(".desc");
+    const inputDueDate = document.querySelector(".due-date");
+    const inputPriority = document.querySelector(".priority");
+
+    const name = inputName.value;
+    const desc = inputDesc.value;
+    const dueDate = inputDueDate.value;
+    const prio = inputPriority.value;
+
+    activeProject.addTask(
+      Task(name, desc, dueDate, prio, activeProject.get("name"))
+    );
+
+    inputName.value = "";
+    inputDesc.value = "";
+    inputDueDate.value = "";
+    inputPriority.value = "";
+
+    loadProject(activeProject);
+  };
+
   const attachEventHandlers = () => {
     const buttonAddProject = document.querySelector(".add-project");
     const buttonAddTask = document.querySelector(".add-task");
 
     buttonAddProject.addEventListener("click", addProject);
+    buttonAddTask.addEventListener("click", addTask);
   };
 
   return { loadProject, loadProjectList, attachEventHandlers };

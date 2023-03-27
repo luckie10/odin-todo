@@ -30,7 +30,7 @@ const Project = (name) => {
       addTask(Task(...task));
     }
   };
-  return { ...stateFunctions(state), getTasks, addDefaultTasks };
+  return { ...stateFunctions(state), addTask, getTasks, addDefaultTasks };
 };
 
 export { Project as default };
