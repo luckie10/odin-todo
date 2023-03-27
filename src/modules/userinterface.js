@@ -38,6 +38,17 @@ const UserInterface = (() => {
     return taskElement;
   };
 
+  const generateProject = (project) => {
+    const projectElement = createElement("li", { class: "project" });
+    const projectName = createElement("div", {
+      class: "project-name",
+      textContent: project.get("name"),
+    });
+
+    projectElement.append(projectName);
+    return projectElement;
+  };
+
   const loadProject = (project) => {
     const tasks = project.getTasks();
 
@@ -46,6 +57,12 @@ const UserInterface = (() => {
     }
 
     activeProject = project;
+  };
+
+  const loadProjectList = (projectList) => {
+    for (const project of projectList) {
+      projectListElement.appendChild(generateProject(project));
+    }
   };
 
   const addProject = () => {
@@ -64,7 +81,7 @@ const UserInterface = (() => {
     buttonAddProject.addEventListener("click", addProject);
   };
 
-  return { loadProject, attachEventHandlers };
+  return { loadProject, loadProjectList, attachEventHandlers };
 })();
 
 export { UserInterface as default };
