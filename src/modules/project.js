@@ -1,4 +1,5 @@
 import { stateFunctions } from "../util.js";
+import Task from "./task";
 
 const Project = (name) => {
   const state = { name };
@@ -18,7 +19,18 @@ const Project = (name) => {
 
   const getTasks = () => tasks;
 
-  return { ...stateFunctions(state) };
+  const addDefaultTasks = () => {
+    const defaultTasks = [
+      ["Eat", "Nom Nom Nom", "Now", 0, state.name],
+      ["Drink", "Gulp Gulp Gulp", "Today", 1, state.name],
+      ["Sleep", "zZzZzZ", "Tonight", 2, state.name],
+    ];
+
+    for (const task of defaultTasks) {
+      addTask(Task(...task));
+    }
+  };
+  return { ...stateFunctions(state), getTasks, addDefaultTasks };
 };
 
 export { Project as default };
