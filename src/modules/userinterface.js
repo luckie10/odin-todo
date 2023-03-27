@@ -1,4 +1,4 @@
-import { createElement } from "../util";
+import { createElement, removeAllChildren } from "../util";
 import ProjectList from "./projectlist";
 import Project from "./project";
 
@@ -50,6 +50,8 @@ const UserInterface = (() => {
   };
 
   const loadProject = (project) => {
+    removeAllChildren(taskListElement);
+
     const tasks = project.getTasks();
 
     for (const task of tasks) {

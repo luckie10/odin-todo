@@ -35,4 +35,10 @@ function createElement(tagName, attributes) {
   return element;
 }
 
-export { stateFunctions, createElement };
+function removeAllChildren(element) {
+  while (element.firstChild) {
+    element.removeChild(element.firstChild);
+  }
+}
+
+export { stateFunctions, createElement, removeAllChildren };
