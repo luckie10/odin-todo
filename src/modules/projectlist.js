@@ -1,3 +1,5 @@
+import Project from "./project";
+
 const ProjectList = (() => {
   const projects = [];
 
@@ -22,7 +24,15 @@ const ProjectList = (() => {
 
   const getProjects = () => projects;
 
-  return { addProject, getProject, getProjects };
+  const addDefaultProjects = () => {
+    const defaultProjects = ["Inbox"];
+
+    for (const projectName of defaultProjects) {
+      addProject(Project(projectName));
+    }
+  };
+
+  return { addProject, getProject, getProjects, addDefaultProjects };
 })();
 
 export { ProjectList as default };
