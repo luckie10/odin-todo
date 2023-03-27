@@ -1,8 +1,11 @@
 import { createElement } from "../util";
 import ProjectList from "./projectlist";
+import Project from "./project";
+
 const UserInterface = (() => {
   let activeProject = ProjectList.getProject("Inbox");
 
+  const projectListElement = document.querySelector(".project-list");
   const taskListElement = document.querySelector(".task-list");
 
   const generateTask = (task) => {
@@ -45,7 +48,23 @@ const UserInterface = (() => {
     activeProject = project;
   };
 
-  return { loadProject };
+  const addProject = () => {
+    const inputProjectName = document.querySelector(".project-name");
+    const name = inputProjectName.value;
+
+    const result = ProjectList.addProject(Project(name));
+    if (result) return; // TODO: Add error msg 'Project already exists'
+    inputProjectName.value = "";
+  };
+
+  const attachEventHandlers = () => {
+    const buttonAddProject = document.querySelector(".add-project");
+    const buttonAddTask = document.querySelector(".add-task");
+
+    buttonAddProject.addEventListener("click", addProject);
+  };
+
+  return { loadProject, attachEventHandlers };
 })();
 
 export { UserInterface as default };
