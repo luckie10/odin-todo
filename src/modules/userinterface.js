@@ -82,6 +82,8 @@ const UserInterface = (() => {
   };
 
   const loadProjectList = (projectList) => {
+    removeAllChildren(projectListElement);
+
     for (const project of projectList) {
       projectListElement.appendChild(generateProject(project));
     }
