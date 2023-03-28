@@ -38,6 +38,8 @@ const UserInterface = (() => {
       class: "button-delete-task",
       textContent: "Delete",
     });
+
+    taskComplete.addEventListener("click", task.toggleComplete);
     buttonDeleteTask.addEventListener("click", () => {
       activeProject.deleteTask(task);
 
