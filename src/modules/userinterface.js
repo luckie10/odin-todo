@@ -34,8 +34,25 @@ const UserInterface = (() => {
       class: "task-complete",
       textContent: complete,
     });
+    const buttonDeleteTask = createElement("button", {
+      class: "button-delete-task",
+      textContent: "Delete",
+    });
+    buttonDeleteTask.addEventListener("click", () => {
+      activeProject.deleteTask(task);
 
-    taskElement.append(taskComplete, taskName, taskDesc, taskDueDate, taskPrio);
+      loadProject(activeProject);
+    });
+
+    taskElement.append(
+      taskComplete,
+      taskName,
+      taskDesc,
+      taskDueDate,
+      taskPrio,
+      buttonDeleteTask
+    );
+
     return taskElement;
   };
 

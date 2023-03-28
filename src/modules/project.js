@@ -10,7 +10,10 @@ const Project = (name) => {
   };
 
   const deleteTask = (taskToDelete) => {
-    tasks = tasks.filter((task) => task !== taskToDelete);
+    tasks.splice(
+      tasks.findIndex((task) => task === taskToDelete),
+      1
+    );
   };
 
   const setTasks = (taskList) => {
@@ -30,7 +33,13 @@ const Project = (name) => {
       addTask(Task(...task));
     }
   };
-  return { ...stateFunctions(state), addTask, getTasks, addDefaultTasks };
+  return {
+    ...stateFunctions(state),
+    addTask,
+    deleteTask,
+    getTasks,
+    addDefaultTasks,
+  };
 };
 
 export { Project as default };
