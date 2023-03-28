@@ -95,6 +95,7 @@ const UserInterface = (() => {
 
     const result = ProjectList.addProject(Project(name));
     if (result) return; // TODO: Add error msg 'Project already exists'
+    loadProjectList(ProjectList.getProjects());
     inputProjectName.value = "";
   };
 
