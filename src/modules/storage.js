@@ -5,7 +5,17 @@ const handler = WebStorageHandler.storageAvailable("localStorage")
   : {}; // TODO: implement non WebStorage option
 
 const Storage = ((handler) => {
-  return {};
+  const updateTasks = (tasks) => {
+    const tasksState = [];
+
+    for (const task of tasks) {
+      tasksState.push(task.getState());
+    }
+
+    handler.updateTable("tasks", tasksState);
+  };
+
+  return { updateTasks };
 })(handler);
 
 export { Storage as default };

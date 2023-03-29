@@ -1,5 +1,6 @@
 import { stateFunctions } from "../util.js";
 import Task from "./task";
+import Storage from "./storage";
 
 const Project = (name) => {
   const state = { name };
@@ -7,6 +8,7 @@ const Project = (name) => {
 
   const addTask = (task) => {
     tasks.push(task);
+    Storage.updateTasks(tasks);
   };
 
   const deleteTask = (taskToDelete) => {
@@ -14,6 +16,7 @@ const Project = (name) => {
       tasks.findIndex((task) => task === taskToDelete),
       1
     );
+    Storage.updateTasks(tasks);
   };
 
   const setTasks = (taskList) => {
