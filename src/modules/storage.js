@@ -15,10 +15,13 @@ const Storage = ((handler) => {
     return state;
   };
 
-  return { updateTasks };
   const updateTasks = (tasks) =>
     handler.updateTable("tasks", extractObjectState(tasks));
 
+  const updateProjects = (projects) =>
+    handler.updateTable("projects", extractObjectState(projects));
+
+  return { updateTasks, updateProjects };
 })(handler);
 
 export { Storage as default };
