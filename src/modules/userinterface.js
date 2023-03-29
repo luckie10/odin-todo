@@ -9,6 +9,11 @@ const UserInterface = (() => {
   const projectListElement = document.querySelector(".project-list");
   const taskListElement = document.querySelector(".task-list");
 
+  const inputTaskName = document.querySelector(".task-name");
+  const inputTaskDesc = document.querySelector(".desc");
+  const inputTaskDueDate = document.querySelector(".due-date");
+  const inputTaskPriority = document.querySelector(".priority");
+
   const generateTask = (task) => {
     const taskState = task.getState();
     const { name, desc, dueDate, prio, complete } = taskState;
@@ -100,24 +105,19 @@ const UserInterface = (() => {
   };
 
   const addTask = () => {
-    const inputName = document.querySelector(".task-name");
-    const inputDesc = document.querySelector(".desc");
-    const inputDueDate = document.querySelector(".due-date");
-    const inputPriority = document.querySelector(".priority");
-
-    const name = inputName.value;
-    const desc = inputDesc.value;
-    const dueDate = inputDueDate.value;
-    const prio = inputPriority.value;
+    const name = inputTaskName.value;
+    const desc = inputTaskDesc.value;
+    const dueDate = inputTaskDueDate.value;
+    const prio = inputTaskPriority.value;
 
     activeProject.addTask(
       Task(name, desc, dueDate, prio, activeProject.get("name"))
     );
 
-    inputName.value = "";
-    inputDesc.value = "";
-    inputDueDate.value = "";
-    inputPriority.value = "";
+    inputTaskName.value = "";
+    inputTaskDesc.value = "";
+    inputTaskDueDate.value = "";
+    inputTaskPriority.value = "";
 
     loadProject(activeProject);
   };
