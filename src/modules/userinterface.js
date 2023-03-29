@@ -75,6 +75,30 @@ const UserInterface = (() => {
     return projectElement;
   };
 
+  const generateSelectOption = (value, text, selected = false) => {
+    const opt = document.createElement("option");
+    opt.value = value;
+    opt.text = text;
+    opt.selected = selected;
+
+    return opt;
+  };
+
+  const loadProjectOptions = (projects) => {
+    removeAllChildren(inputTaskProject);
+
+    for (const project of projects) {
+      const projectName = project.get("name");
+      inputTaskProject.add(
+        generateSelectOption(
+          projectName,
+          projectName,
+          project === activeProject
+        )
+      );
+    }
+  };
+
   const loadProject = (project) => {
     removeAllChildren(taskListElement);
 
@@ -98,10 +122,13 @@ const UserInterface = (() => {
   const addProject = () => {
     const inputProjectName = document.querySelector(".project-name");
     const name = inputProjectName.value;
+    const projects = ProjectList.getProjects();
 
     const result = ProjectList.addProject(Project(name));
     if (result) return; // TODO: Add error msg 'Project already exists'
-    loadProjectList(ProjectList.getProjects());
+
+    loadProjectList(projects);
+    loadProjectOptions(projects);
     inputProjectName.value = "";
   };
 
@@ -123,31 +150,6 @@ const UserInterface = (() => {
     loadProject(activeProject);
   };
 
-  const generateSelectOption = (value, text, selected = false) => {
-    const opt = document.createElement("option");
-    opt.value = value;
-    opt.text = text;
-    opt.selected = selected;
-
-    return opt;
-  };
-
-  const addProjectOptions = (projects) => {
-    inputTaskProject.add(generateSelectOption("Test", "Test"));
-    inputTaskProject.add(generateSelectOption("Test1", "Test1"));
-    inputTaskProject.add(generateSelectOption("Test2", "Test2"));
-    for (const project of projects) {
-      const projectName = project.get("name");
-      inputTaskProject.add(
-        generateSelectOption(
-          projectName,
-          projectName,
-          project === activeProject
-        )
-      );
-    }
-  };
-
   const attachEventHandlers = () => {
     const buttonAddProject = document.querySelector(".add-project");
     const buttonAddTask = document.querySelector(".add-task");
@@ -159,7 +161,7 @@ const UserInterface = (() => {
   return {
     loadProject,
     loadProjectList,
-    addProjectOptions,
+    loadProjectOptions,
     attachEventHandlers,
   };
 })();
