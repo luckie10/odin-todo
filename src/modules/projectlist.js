@@ -16,8 +16,11 @@ const ProjectList = (() => {
     projects.find((project) => project.get("name") === projectName);
 
   const deleteProject = (projectToDelete) => {
-    projects = projects.filter((project) => project !== projectToDelete);
+    projects.splice(
+      projects.findIndex((project) => project === projectToDelete)
+    );
   };
+
   const setProjects = (projectsList) => {
     projects = ProjectList;
   };
