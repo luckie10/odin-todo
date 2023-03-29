@@ -13,6 +13,7 @@ const UserInterface = (() => {
   const inputTaskDesc = document.querySelector(".desc");
   const inputTaskDueDate = document.querySelector(".due-date");
   const inputTaskPriority = document.querySelector(".priority");
+  const inputTaskProject = document.querySelector(".add-task-project");
 
   const generateTask = (task) => {
     const taskState = task.getState();
@@ -122,6 +123,31 @@ const UserInterface = (() => {
     loadProject(activeProject);
   };
 
+  const generateSelectOption = (value, text, selected = false) => {
+    const opt = document.createElement("option");
+    opt.value = value;
+    opt.text = text;
+    opt.selected = selected;
+
+    return opt;
+  };
+
+  const addProjectOptions = (projects) => {
+    inputTaskProject.add(generateSelectOption("Test", "Test"));
+    inputTaskProject.add(generateSelectOption("Test1", "Test1"));
+    inputTaskProject.add(generateSelectOption("Test2", "Test2"));
+    for (const project of projects) {
+      const projectName = project.get("name");
+      inputTaskProject.add(
+        generateSelectOption(
+          projectName,
+          projectName,
+          project === activeProject
+        )
+      );
+    }
+  };
+
   const attachEventHandlers = () => {
     const buttonAddProject = document.querySelector(".add-project");
     const buttonAddTask = document.querySelector(".add-task");
@@ -130,7 +156,12 @@ const UserInterface = (() => {
     buttonAddTask.addEventListener("click", addTask);
   };
 
-  return { loadProject, loadProjectList, attachEventHandlers };
+  return {
+    loadProject,
+    loadProjectList,
+    addProjectOptions,
+    attachEventHandlers,
+  };
 })();
 
 export { UserInterface as default };
