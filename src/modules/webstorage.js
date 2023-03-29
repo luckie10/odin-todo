@@ -1,5 +1,5 @@
 const WebStorageHandler = (() => {
-  function storageAvailable(type) {
+  const storageAvailable = (type) => {
     let storage;
 
     try {
@@ -25,9 +25,12 @@ const WebStorageHandler = (() => {
         storage.length !== 0
       );
     }
-  }
+  };
 
-  return { storageAvailable };
+  const updateTable = (table, tableValue) =>
+    localStorage.setItem(table, JSON.stringify(tableValue));
+
+  return { storageAvailable, updateTable };
 })();
 
 export { WebStorageHandler as default };
