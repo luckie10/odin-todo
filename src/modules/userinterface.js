@@ -65,7 +65,7 @@ const UserInterface = (() => {
   };
 
   const generateProject = (project) => {
-    const projectElement = createElement("li", { class: "project" });
+    const projectElement = createElement("li", { class: "project-list-item" });
     const projectName = createElement("div", {
       class: "project-name",
       textContent: project.get("name"),
@@ -137,22 +137,23 @@ const UserInterface = (() => {
     const desc = inputTaskDesc.value;
     const dueDate = inputTaskDueDate.value;
     const prio = inputTaskPriority.value;
+    const projectName = inputTaskProject.value;
 
-    activeProject.addTask(
-      Task(name, desc, dueDate, prio, activeProject.get("name"))
-    );
+    const project = ProjectList.getProject(projectName);
+
+    project.addTask(Task(name, desc, dueDate, prio, projectName));
 
     inputTaskName.value = "";
     inputTaskDesc.value = "";
     inputTaskDueDate.value = "";
     inputTaskPriority.value = "";
 
-    loadProject(activeProject);
+    if (activeProject === project) loadProject(activeProject);
   };
 
   const attachEventHandlers = () => {
     const buttonAddProject = document.querySelector(".add-project");
-    const buttonAddTask = document.querySelector(".add-task");
+    const buttonAddTask = document.querySelector(".add-task-button");
 
     buttonAddProject.addEventListener("click", addProject);
     buttonAddTask.addEventListener("click", addTask);
