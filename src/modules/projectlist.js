@@ -1,4 +1,5 @@
 import Project from "./project";
+import Storage from "./storage";
 
 const ProjectList = (() => {
   const projects = [];
@@ -10,6 +11,7 @@ const ProjectList = (() => {
       return "Project already exists";
 
     projects.push(newProject);
+    Storage.updateProjects(projects);
   };
 
   const getProject = (projectName) =>
@@ -19,6 +21,7 @@ const ProjectList = (() => {
     projects.splice(
       projects.findIndex((project) => project === projectToDelete)
     );
+    Storage.updateProjects(projects);
   };
 
   const setProjects = (projectsList) => {
