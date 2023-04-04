@@ -1,4 +1,5 @@
 import WebStorageHandler from "./webstorage";
+import Task from "./task";
 
 const handler = WebStorageHandler.storageAvailable("localStorage")
   ? WebStorageHandler
@@ -21,7 +22,17 @@ const Storage = ((handler) => {
   const updateProjects = (projects) =>
     handler.updateTable("projects", extractObjectState(projects));
 
-  return { updateTasks, updateProjects };
+  const getTasks = () => {
+    const tasks = handler.getItem("tasks");
+    if (!tasks) return;
+
+    return JSON.parse(tasks).map(
+      ({ name, desc, dueDate, prio, projectName, complete }) =>
+        Task(name, desc, dueDate, prio, projectName, complete)
+    );
+  };
+
+  return { updateTasks, updateProjects, getTasks };
 })(handler);
 
 export { Storage as default };
