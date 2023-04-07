@@ -12,18 +12,18 @@ const Project = (name) => {
   };
 
   const deleteTask = (taskToDelete) => {
-    tasks.splice(
-      tasks.findIndex((task) => task === taskToDelete),
-      1
-    );
-    Storage.updateTasks(tasks);
+    const index = tasks.findIndex((task) => task === taskToDelete);
+    if (index !== -1) {
+      tasks.splice(index, 1);
+      Storage.updateTasks(tasks);
+    }
   };
 
   const setTasks = (taskList) => {
-    tasks = taskList;
+    tasks.splice(0, tasks.length, ...taskList);
   };
 
-  const getTasks = () => tasks;
+  const getTasks = () => [...tasks];
 
   const addDefaultTasks = () => {
     const defaultTasks = [
@@ -32,14 +32,16 @@ const Project = (name) => {
       ["Sleep", "zZzZzZ", "Tonight", 2, state.name],
     ];
 
-    for (const task of defaultTasks) {
+    defaultTasks.forEach((task) => {
       addTask(Task(...task));
-    }
+    });
   };
+
   return {
     ...stateFunctions(state),
     addTask,
     deleteTask,
+    setTasks,
     getTasks,
     addDefaultTasks,
   };
