@@ -18,27 +18,33 @@ const ProjectList = (() => {
     projects.find((project) => project.get("name") === projectName);
 
   const deleteProject = (projectToDelete) => {
-    projects.splice(
-      projects.findIndex((project) => project === projectToDelete)
-    );
-    Storage.updateProjects(projects);
-  };
-
-  const setProjects = (projectsList) => {
-    projects = ProjectList;
-  };
-
-  const getProjects = () => projects;
-
-  const addDefaultProjects = () => {
-    const defaultProjects = ["Inbox"];
-
-    for (const projectName of defaultProjects) {
-      addProject(Project(projectName));
+    const index = projects.findIndex((project) => project === projectToDelete);
+    if (index !== -1) {
+      projects.splice(index, 1);
+      Storage.updateProjects(projects);
     }
   };
 
-  return { addProject, getProject, getProjects, addDefaultProjects };
+  const setProjects = (projectsList) => {
+    projects.splice(0, projects.length, ...projectsList);
+  };
+
+  const getProjects = () => [...projects];
+
+  const addDefaultProjects = () => {
+    const defaultProjects = ["Inbox", "Work"];
+
+    defaultProjects.forEach((projectName) => addProject(Project(projectName)));
+  };
+
+  return {
+    addProject,
+    getProject,
+    deleteProject,
+    getProjects,
+    setProjects,
+    addDefaultProjects,
+  };
 })();
 
 export { ProjectList as default };
