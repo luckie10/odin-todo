@@ -2,6 +2,7 @@ import { createElement, removeAllChildren } from "../util";
 import ProjectList from "./projectlist";
 import Project from "./project";
 import Task from "./task";
+import Storage from "./storage";
 
 const UserInterface = (() => {
   let activeProject = ProjectList.getProject("Inbox");
@@ -159,11 +160,39 @@ const UserInterface = (() => {
     buttonAddTask.addEventListener("click", addTask);
   };
 
+  const init = () => {
+    if (!Storage.getProjects()) {
+      ProjectList.addDefaultProjects();
+      return;
+    }
+
+    const projects = Storage.getProjects();
+    ProjectList.setProjects(projects);
+
+    if (!Storage.getTasks()) {
+      ProjectList.getProject("Work").addDefaultTasks();
+    }
+
+    const tasks = Storage.getTasks();
+    for (const project of projects) {
+      const filteredTasks = tasks.filter(
+        (task) => task.get("projectName") === project.get("name")
+      );
+      project.setTasks(filteredTasks);
+    }
+
+    loadProjectList(projects);
+    loadProjectOptions(projects);
+    loadProject(activeProject);
+    attachEventHandlers();
+  };
+
   return {
     loadProject,
     loadProjectList,
     loadProjectOptions,
     attachEventHandlers,
+    init,
   };
 })();
 
