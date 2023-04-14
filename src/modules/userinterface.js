@@ -5,7 +5,7 @@ import Task from "./task";
 import Storage from "./storage";
 
 const UserInterface = (() => {
-  let activeProject = ProjectList.getProject("Inbox");
+  let activeProject;
 
   const projectListElement = document.querySelector(".project-list");
   const taskListElement = document.querySelector(".task-list");
@@ -73,6 +73,7 @@ const UserInterface = (() => {
     });
 
     projectElement.append(projectName);
+    projectElement.addEventListener("click", () => loadProject(project));
     return projectElement;
   };
 
@@ -115,9 +116,9 @@ const UserInterface = (() => {
   const loadProjectList = (projectList) => {
     removeAllChildren(projectListElement);
 
-    for (const project of projectList) {
+    projectList.forEach((project) => {
       projectListElement.appendChild(generateProject(project));
-    }
+    });
   };
 
   const addProject = () => {
@@ -160,19 +161,17 @@ const UserInterface = (() => {
     buttonAddTask.addEventListener("click", addTask);
   };
 
-  const init = () => {
-    if (!Storage.getProjects()) {
-      ProjectList.addDefaultProjects();
-      return;
-    }
-
+  const initProjects = () => {
+    if (!Storage.getProjects()) ProjectList.addDefaultProjects();
     const projects = Storage.getProjects();
     ProjectList.setProjects(projects);
+    activeProject = ProjectList.getProject("Inbox");
 
-    if (!Storage.getTasks()) {
-      ProjectList.getProject("Work").addDefaultTasks();
-    }
+    return projects;
+  };
 
+  const initTasks = (projects) => {
+    if (!Storage.getTasks()) ProjectList.getProject("Work").addDefaultTasks();
     const tasks = Storage.getTasks();
     for (const project of projects) {
       const filteredTasks = tasks.filter(
@@ -180,7 +179,11 @@ const UserInterface = (() => {
       );
       project.setTasks(filteredTasks);
     }
+  };
 
+  const init = () => {
+    const projects = initProjects();
+    initTasks(projects);
     loadProjectList(projects);
     loadProjectOptions(projects);
     loadProject(activeProject);
