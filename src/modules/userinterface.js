@@ -3,6 +3,7 @@ import ProjectList from "./projectlist";
 import Project from "./project";
 import Task from "./task";
 import Storage from "./storage";
+import EditTaskModal from "./edit_task_modal";
 
 const UserInterface = (() => {
   let activeProject;
@@ -17,9 +18,9 @@ const UserInterface = (() => {
   const inputTaskProject = document.querySelector(".add-task-project");
 
   const generateTask = (task) => {
-    const taskState = task.getState();
-    const { name, desc, dueDate, prio, complete } = taskState;
-    const taskElement = createElement("li", { class: "task" });
+    const { name, desc, dueDate, prio, complete } = task.getState();
+    const taskElementWrapper = createElement("li", { class: "task" });
+    const taskElement = createElement("div", {});
     const taskName = createElement("div", {
       class: "task-name",
       textContent: name,
@@ -47,22 +48,19 @@ const UserInterface = (() => {
     });
 
     taskComplete.addEventListener("click", task.toggleComplete);
+    taskElement.addEventListener("click", () =>
+      EditTaskModal.loadEditTaskModal(task)
+    );
     buttonDeleteTask.addEventListener("click", () => {
       activeProject.deleteTask(task);
 
       loadProject(activeProject);
     });
 
-    taskElement.append(
-      taskComplete,
-      taskName,
-      taskDesc,
-      taskDueDate,
-      taskPrio,
-      buttonDeleteTask
-    );
+    taskElement.append(taskName, taskDesc, taskDueDate, taskPrio);
+    taskElementWrapper.append(taskComplete, taskElement, buttonDeleteTask);
 
-    return taskElement;
+    return taskElementWrapper;
   };
 
   const generateProject = (project) => {
@@ -86,16 +84,16 @@ const UserInterface = (() => {
     return opt;
   };
 
-  const loadProjectOptions = (projects) => {
-    removeAllChildren(inputTaskProject);
+  const loadProjectOptions = (selectNode, projects, selectedProject) => {
+    removeAllChildren(selectNode);
 
     for (const project of projects) {
       const projectName = project.get("name");
-      inputTaskProject.add(
+      selectNode.add(
         generateSelectOption(
           projectName,
           projectName,
-          project === activeProject
+          project === selectedProject
         )
       );
     }
@@ -130,7 +128,7 @@ const UserInterface = (() => {
     if (result) return; // TODO: Add error msg 'Project already exists'
 
     loadProjectList(projects);
-    loadProjectOptions(projects);
+    loadProjectOptions(inputTaskProject, projects, activeProject);
     inputProjectName.value = "";
   };
 
@@ -185,7 +183,7 @@ const UserInterface = (() => {
     const projects = initProjects();
     initTasks(projects);
     loadProjectList(projects);
-    loadProjectOptions(projects);
+    loadProjectOptions(inputTaskProject, projects, activeProject);
     loadProject(activeProject);
     attachEventHandlers();
   };
