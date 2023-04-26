@@ -27,12 +27,13 @@ const WebStorageHandler = (() => {
     }
   };
 
-  const updateTable = (table, tableValue) =>
-    localStorage.setItem(table, JSON.stringify(tableValue));
+  const setTable = (table, value) => {
+    localStorage.setItem(table, JSON.stringify(value));
+  };
 
-  const getItem = (table) => localStorage.getItem(table);
+  const getTable = (tableName) => JSON.parse(localStorage.getItem(tableName));
 
-  return { storageAvailable, updateTable, getItem };
+  return { storageAvailable, setTable, getTable };
 })();
 
 export { WebStorageHandler as default };

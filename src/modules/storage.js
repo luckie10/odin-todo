@@ -7,37 +7,49 @@ const handler = WebStorageHandler.storageAvailable("localStorage")
   : {}; // TODO: implement non WebStorage option
 
 const Storage = ((handler) => {
-  const extractObjectState = (objects) => {
-    const state = [];
-
-    for (const obj of objects) {
-      state.push(obj.getState());
-    }
-
-    return state;
+  const addItem = (type, item) => {
+    const items = handler.getTable(type) || [];
+    items.push(item.getState());
+    handler.setTable(type, items);
   };
 
-  const getObjects = (table, object) => {
-    const tableItems = handler.getItem(table);
-    if (!tableItems) return;
+  const addProject = (project) => addItem("projects", project);
 
-    return JSON.parse(tableItems).map(
-      ({ name, desc, dueDate, prio, projectName, complete }) =>
-        object(name, desc, dueDate, prio, projectName, complete)
+  const addTask = (task) => addItem("tasks", task);
+
+  const getProjects = () => {
+    const projects = handler.getTable("projects");
+    if (!projects) return;
+    return projects.map(({ name, tasks }) => Project(name, tasks));
+  };
+
+  const getTasks = () => {
+    const tasks = handler.getTable("tasks");
+    if (!tasks) return;
+    return tasks.map(({ name, desc, dueDate, prio, projectName, complete }) =>
+      Task(name, desc, dueDate, prio, projectName, complete)
     );
   };
 
-  const updateTasks = (tasks) =>
-    handler.updateTable("tasks", extractObjectState(tasks));
+  const deleteTask = (taskToDelete) => {
+    const tasks = handler.getTable("tasks");
+    if (!tasks) return;
 
-  const updateProjects = (projects) =>
-    handler.updateTable("projects", extractObjectState(projects));
+    const indexOfTaskToDelete = tasks.findIndex(
+      (task) => task.name === taskToDelete.get("name")
+    );
+    if (indexOfTaskToDelete === -1) return;
+    tasks.splice(indexOfTaskToDelete, 1);
+    handler.setTable("tasks", tasks);
+  };
 
-  const getProjects = () => getObjects("projects", Project);
-
-  const getTasks = () => getObjects("tasks", Task);
-
-  return { updateTasks, updateProjects, getProjects, getTasks };
+  return {
+    addProject,
+    addTask,
+    getProjects,
+    getTasks,
+    deleteTask,
+  };
 })(handler);
 
 export { Storage as default };

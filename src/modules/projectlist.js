@@ -11,7 +11,7 @@ const ProjectList = (() => {
       return "Project already exists";
 
     projects.push(newProject);
-    Storage.updateProjects(projects);
+    Storage.addProject(newProject);
   };
 
   const getProject = (projectName) =>
@@ -21,7 +21,7 @@ const ProjectList = (() => {
     const index = projects.findIndex((project) => project === projectToDelete);
     if (index !== -1) {
       projects.splice(index, 1);
-      Storage.updateProjects(projects);
+      // Storage.updateProjects(projects);
     }
   };
 

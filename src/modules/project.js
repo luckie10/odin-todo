@@ -8,14 +8,15 @@ const Project = (name) => {
 
   const addTask = (task) => {
     tasks.push(task);
-    Storage.updateTasks(tasks);
+    Storage.addTask(task);
   };
 
   const deleteTask = (taskToDelete) => {
     const index = tasks.findIndex((task) => task === taskToDelete);
-    if (index !== -1) {
-      tasks.splice(index, 1);
-      Storage.updateTasks(tasks);
+    if (index === -1) return;
+    tasks.splice(index, 1);
+    Storage.deleteTask(taskToDelete);
+  };
     }
   };
 
