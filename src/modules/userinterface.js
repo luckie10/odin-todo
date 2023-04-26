@@ -122,11 +122,11 @@ const UserInterface = (() => {
   const addProject = () => {
     const inputProjectName = document.querySelector(".project-name");
     const name = inputProjectName.value;
-    const projects = ProjectList.getProjects();
 
     const result = ProjectList.addProject(Project(name));
     if (result) return; // TODO: Add error msg 'Project already exists'
 
+    const projects = ProjectList.getProjects();
     loadProjectList(projects);
     loadProjectOptions(inputTaskProject, projects, activeProject);
     inputProjectName.value = "";
