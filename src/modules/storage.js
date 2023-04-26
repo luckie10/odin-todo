@@ -13,15 +13,27 @@ const Storage = ((handler) => {
     handler.setTable(type, items);
   };
 
-  const addProject = (project) => addItem("projects", project);
+  const getItemIndex = (table, itemToUpdate, updatedItem) => {
+    const items = handler.getTable(table);
+    if (!items) return;
 
-  const addTask = (task) => addItem("tasks", task);
+    const index = items.findIndex(
+      (item) => item.name === itemToUpdate.get("name")
+    );
+    if (index === -1) return;
+
+    return { items, index };
+  };
+
+  const addProject = (project) => addItem("projects", project);
 
   const getProjects = () => {
     const projects = handler.getTable("projects");
     if (!projects) return;
     return projects.map(({ name, tasks }) => Project(name, tasks));
   };
+
+  const addTask = (task) => addItem("tasks", task);
 
   const getTasks = () => {
     const tasks = handler.getTable("tasks");
@@ -31,23 +43,26 @@ const Storage = ((handler) => {
     );
   };
 
-  const deleteTask = (taskToDelete) => {
-    const tasks = handler.getTable("tasks");
-    if (!tasks) return;
+  const updateTask = (taskToUpdate, updatedTask) => {
+    const { items, index } = getItemIndex("tasks", taskToUpdate);
 
-    const indexOfTaskToDelete = tasks.findIndex(
-      (task) => task.name === taskToDelete.get("name")
-    );
-    if (indexOfTaskToDelete === -1) return;
-    tasks.splice(indexOfTaskToDelete, 1);
-    handler.setTable("tasks", tasks);
+    items.splice(index, 1, updatedTask.getState());
+    handler.setTable("tasks", items);
+  };
+
+  const deleteTask = (taskToDelete) => {
+    const { items, index } = getItemIndex("tasks", taskToDelete);
+
+    items.splice(index, 1);
+    handler.setTable("tasks", items);
   };
 
   return {
     addProject,
-    addTask,
     getProjects,
+    addTask,
     getTasks,
+    updateTask,
     deleteTask,
   };
 })(handler);
