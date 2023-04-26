@@ -1,6 +1,7 @@
 import { stateFunctions } from "../util.js";
 import Task from "./task";
 import Storage from "./storage";
+import ProjectList from "./projectlist";
 
 const Project = (name) => {
   const state = { name };
@@ -17,6 +18,40 @@ const Project = (name) => {
     tasks.splice(index, 1);
     Storage.deleteTask(taskToDelete);
   };
+
+  const editTask = (
+    taskToEdit,
+    newName,
+    newDesc,
+    newDueDate,
+    newPrio,
+    newProject
+  ) => {
+    const taskIndex = tasks.findIndex((task) => task === taskToEdit);
+    if (taskIndex === -1) return;
+
+    if (newProject !== state.name) {
+      ProjectList.getProject(newProject).addTask(
+        Task(
+          newName,
+          newDesc,
+          newDueDate,
+          newPrio,
+          newProject,
+          tasks[taskIndex].get("complete")
+        )
+      );
+      deleteTask(taskToEdit);
+    } else {
+      tasks[taskIndex] = Task(
+        newName,
+        newDesc,
+        newDueDate,
+        newPrio,
+        newProject,
+        tasks[taskIndex].get("complete")
+      );
+      Storage.updateTask(taskToEdit, tasks[taskIndex]);
     }
   };
 
@@ -42,6 +77,7 @@ const Project = (name) => {
     ...stateFunctions(state),
     addTask,
     deleteTask,
+    editTask,
     setTasks,
     getTasks,
     addDefaultTasks,
