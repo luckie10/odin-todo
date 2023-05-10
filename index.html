@@ -7,26 +7,34 @@
 </head>
 
 <body>
-  <div class="sidebar">
-    <div class="project-list-wrapper">
-      <div class="project-header">
-        <input type="text" class="project-name" />
-        <button class="add-project">Add Project</button>
+  <div class="navbar">I am a nav bar WWWEEEEEEEE</div>
+  <div class="wrapper">
+    <div class="sidebar">
+      <div class="project-list-wrapper">
+        <div class="project-header">
+          <input type="text" class="project-name" />
+          <button class="add-project">Add Project</button>
+        </div>
+        <ul class="project-list"></ul>
       </div>
-      <ul class="project-list"></ul>
+    </div>
+    <div class="main">
+      <h2 class="project-title">Name</h2>
+      <div class="add-task">
+        <input type="text" class="task-name" />
+        <input type="text" class="desc" />
+        <input type="text" class="due-date" />
+        <input type="text" class="priority" />
+        <select class="add-task-project"></select>
+        <button class="add-task-button">Add Task</button>
+      </div>
+      <div class="task-list-wrapper">
+        <ul class="task-list"></ul>
+      </div>
     </div>
   </div>
-  <div class="main">
-    <div class="add-task">
-      <input type="text" class="task-name" />
-      <input type="text" class="desc" />
-      <input type="text" class="due-date" />
-      <input type="text" class="priority" />
-      <select class="add-task-project"></select>
-      <button class="add-task-button">Add Task</button>
-    </div>
-    <ul class="task-list"></ul>
-    <div class="edit-task-modal hide">
+  <div class="edit-task-modal-wrapper hide">
+    <div class="edit-task-modal">
       <input type="text" class="edit-task-name" />
       <input type="text" class="edit-task-desc" />
       <input type="text" class="edit-task-due-date" />

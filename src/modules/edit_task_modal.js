@@ -6,6 +6,9 @@ import project from "./project";
 const EditTaskModal = (() => {
   let taskToEdit;
 
+  const editTaskModalNodeWrapper = document.querySelector(
+    ".edit-task-modal-wrapper"
+  );
   const editTaskModalNode = document.querySelector(".edit-task-modal");
   const inputEditTaskName = document.querySelector(".edit-task-name");
   const inputEditTaskDesc = document.querySelector(".edit-task-desc");
@@ -29,7 +32,11 @@ const EditTaskModal = (() => {
       ProjectList.getProject(projectName)
     );
 
-    editTaskModalNode.classList.toggle("hide");
+    editTaskModalNodeWrapper.classList.remove("hide");
+    editTaskModalNodeWrapper.addEventListener("click", (e) => {
+      if (e.target === editTaskModalNodeWrapper)
+        editTaskModalNodeWrapper.classList.add("hide");
+    });
   };
 
   const saveTaskEdit = () => {
