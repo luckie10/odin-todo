@@ -21,7 +21,7 @@ const ProjectList = (() => {
     const index = projects.findIndex((project) => project === projectToDelete);
     if (index !== -1) {
       projects.splice(index, 1);
-      // Storage.updateProjects(projects);
+      Storage.deleteProject(projectToDelete);
     }
   };
 

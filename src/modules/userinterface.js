@@ -69,9 +69,18 @@ const UserInterface = (() => {
       class: "project-name",
       textContent: project.get("name"),
     });
+    const buttonProjectDelete = createElement("button", {
+      class: "project-delete",
+      textContent: "Delete",
+    });
 
-    projectElement.append(projectName);
-    projectElement.addEventListener("click", () => loadProject(project));
+    projectName.addEventListener("click", () => loadProject(project));
+    buttonProjectDelete.addEventListener("click", () => {
+      ProjectList.deleteProject(project);
+      loadProjectList(ProjectList.getProjects());
+    });
+
+    projectElement.append(projectName, buttonProjectDelete);
     return projectElement;
   };
 

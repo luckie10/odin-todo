@@ -33,6 +33,13 @@ const Storage = ((handler) => {
     return projects.map(({ name, tasks }) => Project(name, tasks));
   };
 
+  const deleteProject = (projectToDelete) => {
+    const { items, index } = getItemIndex("projects", projectToDelete);
+
+    items.splice(index, 1);
+    handler.setTable("projects", items);
+  };
+
   const addTask = (task) => addItem("tasks", task);
 
   const getTasks = () => {
@@ -60,6 +67,7 @@ const Storage = ((handler) => {
   return {
     addProject,
     getProjects,
+    deleteProject,
     addTask,
     getTasks,
     updateTask,
