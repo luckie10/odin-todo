@@ -113,6 +113,10 @@ const UserInterface = (() => {
   };
 
   const loadProject = (project) => {
+    const projectName = document.querySelector(".project-title");
+    const name = project.get("name");
+    projectName.innerText = name;
+
     removeAllChildren(taskListElement);
 
     const tasks = project.getTasks();
