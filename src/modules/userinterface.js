@@ -36,14 +36,18 @@ const UserInterface = (() => {
     const taskComplete = createElement("input", {
       type: "checkbox",
       class: "task-complete",
-      textContent: complete,
     });
+    taskComplete.checked = complete;
+    if (complete) taskElement.classList.add("completed");
     const buttonDeleteTask = createElement("button", {
       class: "button-delete-task",
       textContent: "Delete",
     });
 
-    taskComplete.addEventListener("click", task.toggleComplete);
+    taskComplete.addEventListener("click", () => {
+      activeProject.toggleCompleteTask(task);
+      taskElement.classList.toggle("completed");
+    });
     taskElement.addEventListener("click", () =>
       EditTaskModal.loadEditTaskModal(task)
     );

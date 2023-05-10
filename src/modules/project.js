@@ -55,6 +55,14 @@ const Project = (name) => {
     }
   };
 
+  const toggleCompleteTask = (taskToComplete) => {
+    const taskIndex = tasks.findIndex((task) => task === taskToComplete);
+    if (taskIndex === -1) return;
+
+    tasks[taskIndex].toggleComplete();
+    Storage.updateTask(taskToComplete, tasks[taskIndex]);
+  };
+
   const setTasks = (taskList) => {
     tasks.splice(0, tasks.length, ...taskList);
   };
@@ -78,6 +86,7 @@ const Project = (name) => {
     addTask,
     deleteTask,
     editTask,
+    toggleCompleteTask,
     setTasks,
     getTasks,
     addDefaultTasks,

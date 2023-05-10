@@ -109,6 +109,10 @@ li {
   color: #003d9a;
 }
 
+.completed {
+  text-decoration-line: line-through;
+}
+
 .button-delete-task {
   padding: 5px 10px;
 }
