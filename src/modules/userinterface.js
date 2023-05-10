@@ -19,10 +19,10 @@ const UserInterface = (() => {
 
   const generateTask = (task) => {
     const { name, desc, dueDate, prio, complete } = task.getState();
-    const taskElementWrapper = createElement("li", { class: "task" });
-    const taskElement = createElement("div", {});
-    const taskName = createElement("div", {
-      class: "task-name",
+    const taskElementWrapper = createElement("li", { class: "task-wrapper" });
+    const taskElement = createElement("div", { class: "task" });
+    const taskName = createElement("h3", {
+      class: `task-name prio${prio}`,
       textContent: name,
     });
     const taskDesc = createElement("div", {
@@ -32,10 +32,6 @@ const UserInterface = (() => {
     const taskDueDate = createElement("div", {
       class: "task-due-date",
       textContent: dueDate,
-    });
-    const taskPrio = createElement("div", {
-      class: "task-prio",
-      textContent: prio,
     });
     const taskComplete = createElement("input", {
       type: "checkbox",
@@ -57,7 +53,7 @@ const UserInterface = (() => {
       loadProject(activeProject);
     });
 
-    taskElement.append(taskName, taskDesc, taskDueDate, taskPrio);
+    taskElement.append(taskName, taskDesc, taskDueDate);
     taskElementWrapper.append(taskComplete, taskElement, buttonDeleteTask);
 
     return taskElementWrapper;
