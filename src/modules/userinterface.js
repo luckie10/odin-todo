@@ -80,6 +80,14 @@ const UserInterface = (() => {
     return projectElement;
   };
 
+  const changeSelectedOption = () => {
+    const opts = Array.from(inputTaskProject.options);
+    opts.map((opt) => {
+      if (opt.text === activeProject.get("name")) opt.selected = true;
+      else opt.selected = false;
+    });
+  };
+
   const generateSelectOption = (value, text, selected = false) => {
     const opt = document.createElement("option");
     opt.value = value;
@@ -114,6 +122,7 @@ const UserInterface = (() => {
     }
 
     activeProject = project;
+    changeSelectedOption();
   };
 
   const loadProjectList = (projectList) => {
