@@ -13,7 +13,7 @@ const Storage = ((handler) => {
     handler.setTable(type, items);
   };
 
-  const getItemIndex = (table, itemToUpdate, updatedItem) => {
+  const getItemIndex = (table, itemToUpdate) => {
     const items = handler.getTable(table);
     if (!items) return;
 
