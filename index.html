@@ -21,16 +21,31 @@
         <div class="main">
           <h2 class="project-title">Name</h2>
           <div class="add-task">
-            <input type="text" class="task-name" />
-            <input type="text" class="desc" />
-            <input type="date" class="due-date" />
-            <select class="priority">
-              <option value="4" selected>Priority 4</option>
-              <option value="3">Priority 3</option>
-              <option value="2">Priority 2</option>
-              <option value="1">Priority 1</option>
-            </select>
-            <select class="add-task-project"></select>
+            <label for="task-name">
+              Name: <br />
+              <input type="text" name="task-name" class="task-name" />
+            </label>
+            <label for="desc">
+              Desc: <br />
+              <input type="text" name="desc" class="desc" />
+            </label>
+            <label for="due-date">
+              Due date: <br />
+              <input type="date" name="due-date" class="due-date" />
+            </label>
+            <label for="priority">
+              Priority: <br />
+              <select class="priority">
+                <option value="4" selected>Priority 4</option>
+                <option value="3">Priority 3</option>
+                <option value="2">Priority 2</option>
+                <option value="1">Priority 1</option>
+              </select>
+            </label>
+            <label for="task-project">
+              Project: <br />
+              <select name="task-project" class="add-task-project"></select>
+            </label>
             <button class="add-task-button">Add Task</button>
           </div>
           <div class="task-list-wrapper">
@@ -40,16 +55,31 @@
       </div>
       <div class="edit-task-modal-wrapper hide">
         <div class="edit-task-modal">
-          <input type="text" class="edit-task-name" />
-          <input type="text" class="edit-task-desc" />
-          <input type="date" class="edit-task-due-date" />
-          <select class="edit-task-priority">
-            <option value="4">Priority 4</option>
-            <option value="3">Priority 3</option>
-            <option value="2">Priority 2</option>
-            <option value="1">Priority 1</option>
-          </select>
-          <select class="edit-task-project"></select>
+          <label for="edit-task-name">
+            Name:
+            <input type="text" name="edit-task-name" class="edit-task-name" />
+          </label>
+          <label for="edit-task-desc">
+            Description:
+            <input type="text" class="edit-task-desc" />
+          </label>
+          <label for="edit-task-due-date">
+            Due date:
+            <input type="date" class="edit-task-due-date" />
+          </label>
+          <label for="edit-task-priority">
+            Priority:
+            <select class="edit-task-priority">
+              <option value="4">Priority 4</option>
+              <option value="3">Priority 3</option>
+              <option value="2">Priority 2</option>
+              <option value="1">Priority 1</option>
+            </select>
+          </label>
+          <label for="edit-task-project">
+            Project:
+            <select class="edit-task-project"></select>
+          </label>
           <button class="edit-save-task-button">Save</button>
         </div>
       </div>
