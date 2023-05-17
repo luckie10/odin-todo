@@ -1,48 +1,48 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Odin Todo</title>
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <title>Odin Todo</title>
-</head>
-
-<body>
-  <div class="navbar">I am a nav bar WWWEEEEEEEE</div>
-  <div class="wrapper">
-    <div class="sidebar">
-      <div class="project-list-wrapper">
-        <div class="project-header">
-          <input type="text" class="project-name" />
-          <button class="add-project">Add Project</button>
+  <body>
+    <div class="page-wrapper">
+      <div class="navbar">I am a nav bar WWWEEEEEEEE</div>
+      <div class="wrapper">
+        <div class="sidebar">
+          <div class="project-list-wrapper">
+            <div class="project-header">
+              <input type="text" class="project-name" />
+              <button class="add-project">Add Project</button>
+            </div>
+            <ul class="project-list"></ul>
+          </div>
         </div>
-        <ul class="project-list"></ul>
+        <div class="main">
+          <h2 class="project-title">Name</h2>
+          <div class="add-task">
+            <input type="text" class="task-name" />
+            <input type="text" class="desc" />
+            <input type="date" class="due-date" />
+            <input type="text" class="priority" />
+            <select class="add-task-project"></select>
+            <button class="add-task-button">Add Task</button>
+          </div>
+          <div class="task-list-wrapper">
+            <ul class="task-list"></ul>
+          </div>
+        </div>
+      </div>
+      <div class="edit-task-modal-wrapper hide">
+        <div class="edit-task-modal">
+          <input type="text" class="edit-task-name" />
+          <input type="text" class="edit-task-desc" />
+          <input type="date" class="edit-task-due-date" />
+          <input type="text" class="edit-task-priority" />
+          <select class="edit-task-project"></select>
+          <button class="edit-save-task-button">Save</button>
+        </div>
       </div>
     </div>
-    <div class="main">
-      <h2 class="project-title">Name</h2>
-      <div class="add-task">
-        <input type="text" class="task-name" />
-        <input type="text" class="desc" />
-        <input type="text" class="due-date" />
-        <input type="text" class="priority" />
-        <select class="add-task-project"></select>
-        <button class="add-task-button">Add Task</button>
-      </div>
-      <div class="task-list-wrapper">
-        <ul class="task-list"></ul>
-      </div>
-    </div>
-  </div>
-  <div class="edit-task-modal-wrapper hide">
-    <div class="edit-task-modal">
-      <input type="text" class="edit-task-name" />
-      <input type="text" class="edit-task-desc" />
-      <input type="text" class="edit-task-due-date" />
-      <input type="text" class="edit-task-priority" />
-      <select class="edit-task-project"></select>
-      <button class="edit-save-task-button">Save</button>
-    </div>
-  </div>
-</body>
-
+  </body>
 </html>

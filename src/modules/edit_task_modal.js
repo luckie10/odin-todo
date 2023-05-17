@@ -23,7 +23,7 @@ const EditTaskModal = (() => {
 
     inputEditTaskName.value = name;
     inputEditTaskDesc.value = desc;
-    inputEditTaskDueDate.value = dueDate;
+    inputEditTaskDueDate.valueAsDate = new Date(dueDate);
     inputEditTaskPrio.value = prio;
 
     UserInterface.loadProjectOptions(
@@ -42,7 +42,7 @@ const EditTaskModal = (() => {
   const saveTaskEdit = () => {
     const name = inputEditTaskName.value;
     const desc = inputEditTaskDesc.value;
-    const dueDate = inputEditTaskDueDate.value;
+    const dueDate = new Date(inputEditTaskDueDate.value);
     const prio = inputEditTaskPrio.value;
     const projectName = inputEditTaskProject.value;
 

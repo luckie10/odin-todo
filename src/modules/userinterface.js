@@ -4,6 +4,7 @@ import Project from "./project";
 import Task from "./task";
 import Storage from "./storage";
 import EditTaskModal from "./edit_task_modal";
+import { format } from "date-fns";
 
 const UserInterface = (() => {
   let activeProject;
@@ -31,8 +32,9 @@ const UserInterface = (() => {
     });
     const taskDueDate = createElement("div", {
       class: "task-due-date",
-      textContent: dueDate,
+      textContent: format(dueDate, "LLL dd yyyy"),
     });
+    if (dueDate < Date.now()) taskDueDate.classList.add("overdue");
     const taskComplete = createElement("input", {
       type: "checkbox",
       class: "task-complete",
@@ -154,11 +156,11 @@ const UserInterface = (() => {
     inputProjectName.value = "";
   };
 
+  // TODO: Prevent the addition of blank tasks
   const addTask = () => {
     const name = inputTaskName.value;
     const desc = inputTaskDesc.value;
-    const dueDate = inputTaskDueDate.value;
-    const prio = inputTaskPriority.value;
+    const dueDate = new Date(inputTaskDueDate.value + "T00:00"); // Added the "T00:00" to prevent Date constructor from converting to UTC zone
     const projectName = inputTaskProject.value;
 
     const project = ProjectList.getProject(projectName);

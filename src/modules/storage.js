@@ -46,7 +46,7 @@ const Storage = ((handler) => {
     const tasks = handler.getTable("tasks");
     if (!tasks) return;
     return tasks.map(({ name, desc, dueDate, prio, projectName, complete }) =>
-      Task(name, desc, dueDate, prio, projectName, complete)
+      Task(name, desc, new Date(dueDate), prio, projectName, complete)
     );
   };
 

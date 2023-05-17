@@ -71,9 +71,9 @@ const Project = (name) => {
 
   const addDefaultTasks = () => {
     const defaultTasks = [
-      ["Eat", "Nom Nom Nom", "Now", 0, state.name],
-      ["Drink", "Gulp Gulp Gulp", "Today", 1, state.name],
-      ["Sleep", "zZzZzZ", "Tonight", 2, state.name],
+      ["Eat", "Nom Nom Nom", new Date("2023-05-15T00:00"), 0, state.name],
+      ["Drink", "Gulp Gulp Gulp", new Date(2023, 4, 9), 1, state.name],
+      ["Sleep", "zZzZzZ", new Date(Date.now()), 2, state.name],
     ];
 
     defaultTasks.forEach((task) => {

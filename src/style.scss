@@ -13,7 +13,7 @@ $secondary-color: #1b1d1e;
   padding: 0;
 }
 
-body {
+.page-wrapper {
   height: 100vh;
 }
 
@@ -107,6 +107,9 @@ li {
 }
 .prio3 {
   color: #003d9a;
+}
+.overdue {
+  color: #940a00;
 }
 
 .completed {
