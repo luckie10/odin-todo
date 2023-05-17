@@ -24,7 +24,12 @@
             <input type="text" class="task-name" />
             <input type="text" class="desc" />
             <input type="date" class="due-date" />
-            <input type="text" class="priority" />
+            <select class="priority">
+              <option value="4" selected>Priority 4</option>
+              <option value="3">Priority 3</option>
+              <option value="2">Priority 2</option>
+              <option value="1">Priority 1</option>
+            </select>
             <select class="add-task-project"></select>
             <button class="add-task-button">Add Task</button>
           </div>
@@ -38,7 +43,12 @@
           <input type="text" class="edit-task-name" />
           <input type="text" class="edit-task-desc" />
           <input type="date" class="edit-task-due-date" />
-          <input type="text" class="edit-task-priority" />
+          <select class="edit-task-priority">
+            <option value="4">Priority 4</option>
+            <option value="3">Priority 3</option>
+            <option value="2">Priority 2</option>
+            <option value="1">Priority 1</option>
+          </select>
           <select class="edit-task-project"></select>
           <button class="edit-save-task-button">Save</button>
         </div>

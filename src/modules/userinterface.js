@@ -162,6 +162,7 @@ const UserInterface = (() => {
     const desc = inputTaskDesc.value;
     const dueDate = new Date(inputTaskDueDate.value + "T00:00"); // Added the "T00:00" to prevent Date constructor from converting to UTC zone
     const projectName = inputTaskProject.value;
+    const prio = inputTaskPriority.value;
 
     const project = ProjectList.getProject(projectName);
 
